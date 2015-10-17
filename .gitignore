@@ -1,0 +1,12 @@
+target
+build
+.DS_Store
+
+# IntelliJ IDEA
+*.iml
+.idea
+
+# Eclipse IDE
+.classpath
+.project
+.settings
