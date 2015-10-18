@@ -35,7 +35,7 @@ public class ReactController {
     @GET
     public String index() throws Exception {
         List<Comment> comments = service.getComments();
-        String commentBox = react.renderCommentBox(comments);
+        String commentBox = react.render("renderServer", comments);
         String data = mapper.writeValueAsString(comments);
         models.put("content", commentBox);
         models.put("data", data);

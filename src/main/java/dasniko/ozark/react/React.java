@@ -7,8 +7,10 @@ import javax.script.ScriptException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.List;
 
+/**
+ * @author Niko Köbler, http://www.n-k.de, @dasniko
+ */
 public class React {
 
     private ThreadLocal<NashornScriptEngine> engineHolder = new ThreadLocal<NashornScriptEngine>() {
@@ -27,9 +29,9 @@ public class React {
         }
     };
 
-    public  String renderCommentBox(List<Comment> comments) {
+    public  String render(String function, Object object) {
         try {
-            Object html = engineHolder.get().invokeFunction("renderServer", comments);
+            Object html = engineHolder.get().invokeFunction(function, object);
             return String.valueOf(html);
         }
         catch (Exception e) {
