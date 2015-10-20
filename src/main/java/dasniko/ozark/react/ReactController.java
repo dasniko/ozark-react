@@ -21,7 +21,7 @@ public class ReactController {
     private Models models;
 
     @Inject
-    private ReactService service;
+    private BookService service;
 
     private React react;
     private ObjectMapper mapper;
@@ -34,10 +34,10 @@ public class ReactController {
 
     @GET
     public String index() throws Exception {
-        List<Comment> comments = service.getComments();
-        String commentBox = react.render("renderServer", comments);
-        String data = mapper.writeValueAsString(comments);
-        models.put("content", commentBox);
+        List<Book> books = service.getBooks();
+        String bookBox = react.render("renderServer", books);
+        String data = mapper.writeValueAsString(books);
+        models.put("content", bookBox);
         models.put("data", data);
         return "react.jsp";
     }

@@ -10,5 +10,5 @@ import java.util.Set;
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
 @ApplicationPath("/ozark")
-public class ReactApplication extends Application {
+public class BookApplication extends Application {
 }

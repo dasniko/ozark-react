@@ -19,7 +19,7 @@
 <body>
 
     <div id="content">${content}</div>
-    <script type="text/javascript" src="${mvc.contextPath}/js/commentBox.js"></script>
+    <script type="text/javascript" src="${mvc.contextPath}/bookBox.js"></script>
     <script type="text/javascript">
         $(function () {
             renderClient(${data});

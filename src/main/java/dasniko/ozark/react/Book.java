@@ -1,21 +1,19 @@
 package dasniko.ozark.react;
 
-import javax.inject.Named;
-
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
-public class Comment {
+public class Book {
 
     private String author;
-    private String text;
+    private String title;
 
-    public Comment() {
+    public Book() {
     }
 
-    public Comment(String author, String text) {
+    public Book(String author, String title) {
         this.author = author;
-        this.text = text;
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -26,11 +24,11 @@ public class Comment {
         this.author = author;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

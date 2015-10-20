@@ -21,7 +21,7 @@ public class React {
                 nashornScriptEngine.eval(read("nashorn-polyfill.js"));
                 nashornScriptEngine.eval(read("META-INF/resources/webjars/react/0.13.3/react.js"));
                 nashornScriptEngine.eval(read("META-INF/resources/webjars/showdown/0.3.1/src/showdown.js"));
-                nashornScriptEngine.eval(read("commentBox.js"));
+                nashornScriptEngine.eval(read("bookBox.js"));
             } catch (ScriptException e) {
                 throw new RuntimeException(e);
             }
