@@ -5,7 +5,7 @@ This is a simple demo application demonstrating how to use isomorphic JavaScript
 It is inspired by the following demos:
 
 - [TODO MVC](https://github.com/chkal/todo-mvc) by [@chkal](https://twitter.com/chkal), a simple TODO app using MVC 1.0/Ozark
-- [Isomorphic Spring Boot React.js Example](https://github.com/winterbe/spring-react-example) by [@winterbe](https://twitter.com/winterbe)
+- [Isomorphic Spring Boot React.js Example](https://github.com/winterbe/spring-react-example) by [@winterbe_](https://twitter.com/winterbe_)
 - [React.js Tutorial](http://facebook.github.io/react/docs/tutorial.html)
 
 ## Basics
