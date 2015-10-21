@@ -14,7 +14,7 @@ var BookForm = React.createClass({displayName: "BookForm",
     },
     render: function () {
         return (
-            React.createElement("form", {className: "bookForm", onSubmit: this.handleSubmit},
+            React.createElement("form", {className: "bookForm well", onSubmit: this.handleSubmit},
                 React.createElement("h4", null, "Add a new book:"),
                 React.createElement("input", {type: "text", placeholder: "Author", ref: "author", className: "form-control"}),
                 React.createElement("input", {type: "text", placeholder: "Title", ref: "title", className: "form-control"}),
@@ -30,7 +30,7 @@ var Book = React.createClass({displayName: "Book",
         return (
             React.createElement("div", {className: "book"},
                 React.createElement("h3", null, this.props.author),
-                React.createElement("div", {dangerouslySetInnerHTML: {__html: rawMarkup}})
+                React.createElement("div", {className: "lead", dangerouslySetInnerHTML: {__html: rawMarkup}})
             )
         );
     }
