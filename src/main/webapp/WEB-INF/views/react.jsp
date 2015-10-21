@@ -10,7 +10,7 @@
 
     <script src="${mvc.contextPath}/webjars/react/0.13.3/react.min.js"></script>
     <script src="${mvc.contextPath}/webjars/showdown/0.3.1/compressed/showdown.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="${mvc.contextPath}/webjars/jquery/1.11.3/jquery.min.js"></script>
 
     <link href="${mvc.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <link href="${mvc.contextPath}/css/app.css" rel="stylesheet">
