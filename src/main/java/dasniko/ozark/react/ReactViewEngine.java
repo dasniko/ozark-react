@@ -12,10 +12,6 @@ import javax.mvc.engine.ViewEngineContext;
 import javax.mvc.engine.ViewEngineException;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,30 +36,30 @@ public class ReactViewEngine extends ServletViewEngine {
     public void processView(ViewEngineContext context) throws ViewEngineException {
         // parse view and extract the actual template and the react.js function to call
         String view = context.getView();
-        String function;
-        String template;
-        try {
-            URI uri = new URI(view);
-            String[] specificParts = uri.getSchemeSpecificPart().split("\\?");
-            template = specificParts[0];
-            String query = specificParts[1];
-            Map<String, String> params = parse(query);
-            function = params.get("function");
-        } catch (URISyntaxException e) {
-            throw new ViewEngineException(e);
+        String[] viewParts = view.substring(viewPrefix.length()).split("\\?");
+        if (viewParts.length < 2) {
+            throw new ViewEngineException("You have to specify at least a view and a function (e.g. react:view.jsp?function=renderOnServer)!");
         }
+
+        String template = viewParts[0];
+
+        Map<String, String> params = parseQueryString(viewParts[1]);
+        String function = params.get("function");
+
+        String dataKey = params.getOrDefault("data", "data");
+        String contentKey = params.getOrDefault("content", "content");
 
         // get "data" from model
         Models models = context.getModels();
-        Object data = models.get("data");
+        Object data = models.get(dataKey);
 
         // call given js function on data
         String content = react.render(function, data);
 
         // and put results as string in model
-        models.put("content", content);
+        models.put(contentKey, content);
         try {
-            models.put("data", mapper.writeValueAsString(data));
+            models.put(dataKey, mapper.writeValueAsString(data));
         } catch (JsonProcessingException e) {
             throw new ViewEngineException(e);
         }
@@ -80,19 +76,7 @@ public class ReactViewEngine extends ServletViewEngine {
         }
     }
 
-    private Map<String, String> parse(final String query) {
-        return Arrays.asList(query.split("&")).stream().map(p -> p.split("=")).collect(Collectors.toMap(s -> decode(index(s, 0)), s -> decode(index(s, 1))));
-    }
-
-    private static <T> T index(final T[] array, final int index) {
-        return index >= array.length ? null : array[index];
-    }
-
-    private static String decode(final String encoded) {
-        try {
-            return encoded == null ? null : URLDecoder.decode(encoded, "UTF-8");
-        } catch(final UnsupportedEncodingException e) {
-            throw new RuntimeException("Impossible: UTF-8 encoding is required.", e);
-        }
+    private Map<String, String> parseQueryString(final String query) {
+        return Arrays.asList(query.split("&")).stream().map(p -> p.split("=")).collect(Collectors.toMap(s -> s[0], s -> s[1]));
     }
 }
