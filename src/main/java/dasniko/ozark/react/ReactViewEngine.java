@@ -12,6 +12,13 @@ import javax.mvc.engine.ViewEngineContext;
 import javax.mvc.engine.ViewEngineException;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
@@ -20,7 +27,6 @@ import java.io.IOException;
 public class ReactViewEngine extends ServletViewEngine {
 
     private static final String viewPrefix = "react:";
-    private static final String functionParam = "function=";
 
     React react = new React();
     ObjectMapper mapper = new ObjectMapper();
@@ -34,8 +40,18 @@ public class ReactViewEngine extends ServletViewEngine {
     public void processView(ViewEngineContext context) throws ViewEngineException {
         // parse view and extract the actual template and the react.js function to call
         String view = context.getView();
-        String function = view.substring(view.indexOf(functionParam) + functionParam.length());
-        String template = view.substring(viewPrefix.length(), view.indexOf("?"));
+        String function;
+        String template;
+        try {
+            URI uri = new URI(view);
+            String[] specificParts = uri.getSchemeSpecificPart().split("\\?");
+            template = specificParts[0];
+            String query = specificParts[1];
+            Map<String, String> params = parse(query);
+            function = params.get("function");
+        } catch (URISyntaxException e) {
+            throw new ViewEngineException(e);
+        }
 
         // get "data" from model
         Models models = context.getModels();
@@ -61,6 +77,22 @@ public class ReactViewEngine extends ServletViewEngine {
             forwardRequest(ctx, "*.jsp", "*.jspx");
         } catch (ServletException | IOException e) {
             throw new ViewEngineException(e);
+        }
+    }
+
+    private Map<String, String> parse(final String query) {
+        return Arrays.asList(query.split("&")).stream().map(p -> p.split("=")).collect(Collectors.toMap(s -> decode(index(s, 0)), s -> decode(index(s, 1))));
+    }
+
+    private static <T> T index(final T[] array, final int index) {
+        return index >= array.length ? null : array[index];
+    }
+
+    private static String decode(final String encoded) {
+        try {
+            return encoded == null ? null : URLDecoder.decode(encoded, "UTF-8");
+        } catch(final UnsupportedEncodingException e) {
+            throw new RuntimeException("Impossible: UTF-8 encoding is required.", e);
         }
     }
 }
