@@ -1,8 +1,5 @@
 package dasniko.ozark.react;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.annotation.Controller;
@@ -23,22 +20,10 @@ public class ReactController {
     @Inject
     private BookService service;
 
-    private React react;
-    private ObjectMapper mapper;
-
-    @PostConstruct
-    public void init() {
-        react = new React();
-        mapper = new ObjectMapper();
-    }
-
     @GET
     public String index() throws Exception {
         List<Book> books = service.getBooks();
-        String bookBox = react.render("renderServer", books);
-        String data = mapper.writeValueAsString(books);
-        models.put("content", bookBox);
-        models.put("data", data);
-        return "react.jsp";
+        models.put("data", books);
+        return "react:react.jsp?function=renderServer";
     }
 }
