@@ -13,12 +13,11 @@
     <script src="${mvc.contextPath}/webjars/jquery/1.11.3/jquery.min.js"></script>
 
     <link href="${mvc.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-    <link href="${mvc.contextPath}/css/app.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <div id="content">${content}</div>
+    <div id="content" class="container">${content}</div>
     <script type="text/javascript" src="${mvc.contextPath}/bookBox.js"></script>
     <script type="text/javascript">
         $(function () {
