@@ -6,6 +6,7 @@ import org.glassfish.ozark.engine.ServletViewEngine;
 import org.glassfish.ozark.engine.ViewEngineContextImpl;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.engine.Priorities;
 import javax.mvc.engine.ViewEngineContext;
@@ -24,7 +25,9 @@ public class ReactViewEngine extends ServletViewEngine {
 
     private static final String viewPrefix = "react:";
 
-    React react = new React();
+    @Inject
+    React react;
+
     ObjectMapper mapper = new ObjectMapper();
 
     @Override
