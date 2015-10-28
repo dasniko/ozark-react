@@ -8,6 +8,8 @@ It is inspired by the following demos:
 - [Isomorphic Spring Boot React.js Example](https://github.com/winterbe/spring-react-example) by [@winterbe_](https://twitter.com/winterbe_)
 - [React.js Tutorial](http://facebook.github.io/react/docs/tutorial.html)
 
+_Still under heavy development, it's working, but isn't yet perfect._
+
 ## Basics
 
 MVC 1.0 is at a very early stage and this project uses snapshot versions of Ozark.
