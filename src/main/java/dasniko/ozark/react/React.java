@@ -27,17 +27,17 @@ public class React {
         NashornScriptEngine nashorn = (NashornScriptEngine) new NashornScriptEngineFactory().getScriptEngine();
 
         // initial basically needed files for dealing with react
-        List<String> jsResources = Arrays.asList(
-                "nashorn-polyfill.js",
-                "META-INF/resources/webjars/react/0.13.3/react.js"
-        );
+        List<String> jsResources = new ArrayList<>();
+        jsResources.add("nashorn-polyfill.js");
+        jsResources.add("META-INF/resources/webjars/react/0.13.3/react.min.js");
+        jsResources.add("META-INF/resources/webjars/showdown/0.3.1/compressed/showdown.js");
 
         // add all resources from custom application
         jsResources.addAll(getAllFilesFromResourcePath());
         // and load/evaluate them within nashorn
-        jsResources.stream().map(p -> {
+        jsResources.forEach(p -> {
             try {
-                return nashorn.eval(read(p));
+                nashorn.eval(read(p));
             } catch (ScriptException e) {
                 throw new RuntimeException(e);
             }
