@@ -18,7 +18,7 @@
 <body>
 
     <div id="content" class="container">${content}</div>
-    <script type="text/javascript" src="${mvc.contextPath}/bookBox.js"></script>
+    <script type="text/javascript" src="${mvc.contextPath}/js/bookBox.js"></script>
     <script type="text/javascript">
         $(function () {
             renderClient(${data});
