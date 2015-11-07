@@ -18,7 +18,7 @@ dependencies {
     compile 'javax:javaee-web-api:7.0'
     compile 'javax.mvc:javax.mvc-api:1.0-SNAPSHOT'
     compile 'org.glassfish.ozark:ozark:1.0.0-m03-SNAPSHOT'
-    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.20'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
     compile 'org.webjars:react:0.13.3'
     compile 'org.webjars:showdown:0.3.1'
 }
