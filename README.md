@@ -1,6 +1,7 @@
 # Isomorphic (Universal) Ozark ReactJS Demo
 
 [![Build Status](https://img.shields.io/travis/dasniko/ozark-react-example.svg)](https://travis-ci.org/dasniko/ozark-react-example)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dasniko/ozark-react-example/blob/master/LICENSE)
 
 This is a simple demo application demonstrating how to use isomorphic/universal JavaScript with server-side pre-rendered [ReactJS](http://www.reactjs.org) templates with the new Java EE MVC 1.0 ([JSR-371](https://jcp.org/en/jsr/detail?id=371)) reference implementation [Ozark](https://ozark.java.net).
 
@@ -41,8 +42,3 @@ After starting your server, you should be able to access the application at this
 Don't hesitate to contribute to this project in any kind of sending [PRs](https://github.com/dasniko/ozark-react-example/pulls) for improvements, enhancements, and/or bug-fixes.
 
 I appreciate every issue that will be [reported](https://github.com/dasniko/ozark-react-example/issues).
-
-
-## License
-
-- [MIT License](https://github.com/dasniko/ozark-react-example/blob/master/LICENSE)
