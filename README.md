@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/release/dasniko/ozark-react.svg)](https://jitpack.io/#dasniko/ozark-react)
 [![Build Status](https://img.shields.io/travis/dasniko/ozark-react.svg)](https://travis-ci.org/dasniko/ozark-react)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dasniko/ozark-react/blob/master/LICENSE)
 
 This is a ViewEngine implementation for Ozark/MVC 1.0 which uses [ReactJS](http://www.reactjs.org) as the templating mechanism (and technically additionally the built-in JSP engine).
 
@@ -42,8 +43,3 @@ You don't have to use Gradle to use it in your project, just use whatever build 
 Don't hesitate to contribute to this project in any kind of sending [PRs](https://github.com/dasniko/ozark-react/pulls) for improvements, enhancements, and/or bug-fixes.
 
 I appreciate every issue that will be [reported](https://github.com/dasniko/ozark-react/issues).
-
-
-## License
-
-- [MIT License](https://github.com/dasniko/ozark-react/blob/master/LICENSE)
