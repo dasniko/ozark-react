@@ -7,6 +7,9 @@ This is a ViewEngine implementation for Ozark/MVC 1.0 which uses [ReactJS](http:
 
 With this ViewEngine, it is possible do create isomorphic/universal JavaScript applications with Java EE (8), in which Single-Page-Apps will be pre-rendered on the server (good for SEO and response time), delivered to the client(s) and continue working there with the same code.
 
+
+## Demo
+
 A working demo/example with this ViewEngine can be found in the project **[ozark-react-example](https://github.com/dasniko/ozark-react-example)**
 
 
@@ -23,7 +26,7 @@ So there might be some not yet known effects/troubles when running the code.
 
 To be able to use this library as a dependency in your own project, check it out and build it with (the provided) Gradle(wrapper):
 
-    $ gradlew build
+    $ ./gradlew install
 
 If you don't want to build it on your own, you can use a ready build binary from [Jitpack.io](https://jitpack.io).
 A detailed description can be found at
