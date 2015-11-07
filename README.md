@@ -1,33 +1,46 @@
-# Isomorphic Ozark ReactJS
+# Ozark ReactJS ViewEngine
 
-This is a simple demo application demonstrating how to use isomorphic JavaScript with server-side pre-rendered [ReactJS](http://www.reactjs.org) templates with the new Java EE MVC 1.0 ([JSR-371](https://jcp.org/en/jsr/detail?id=371)) reference implementation [Ozark](https://ozark.java.net).
+[![Release](https://img.shields.io/github/release/dasniko/ozark-react.svg)](https://jitpack.io/#dasniko/ozark-react)
+[![Build Status](https://img.shields.io/travis/dasniko/ozark-react.svg)](https://travis-ci.org/dasniko/ozark-react)
 
-It is inspired by the following demos:
+This is a ViewEngine implementation for Ozark/MVC 1.0 which uses [ReactJS](http://www.reactjs.org) as the templating mechanism (and technically additionally the built-in JSP engine).
 
-- [TODO MVC](https://github.com/chkal/todo-mvc) by [@chkal](https://twitter.com/chkal), a simple TODO app using MVC 1.0/Ozark
-- [Isomorphic Spring Boot React.js Example](https://github.com/winterbe/spring-react-example) by [@winterbe_](https://twitter.com/winterbe_)
-- [React.js Tutorial](http://facebook.github.io/react/docs/tutorial.html)
+With this ViewEngine, it is possible do create isomorphic/universal JavaScript applications with Java EE (8), in which Single-Page-Apps will be pre-rendered on the server (good for SEO and response time), delivered to the client(s) and continue working there with the same code.
 
-_Still under heavy development, it's working, but isn't yet perfect._
+A working demo/example with this ViewEngine can be found in the project **[ozark-react-example](https://github.com/dasniko/ozark-react-example)**
 
-## Basics
+
+## MVC/Ozark Basics
 
 MVC 1.0 is at a very early stage and this project uses snapshot versions of Ozark.
-So there might be some not yet known effects/troubles when running the application.
+So there might be some not yet known effects/troubles when running the code.
 
-For your convenience, this project comes with all dependencies which are needed to run the application in a pure servlet-container like [Apache Tomcat](http://tomcat.apache.org) or [Jetty](http://eclipse.org/jetty/).
-So you don't have to rely on your container to provide all of the technology and libraries
-(Ozark itself is yet developed for [Glassfish](https://glassfish.java.net) only, but this might (hopefully) change in the future).
+- [MVC 1.0](https://java.net/projects/mvc-spec/pages/Home) specification / [JSR-371](https://www.jcp.org/en/jsr/detail?id=371)
+- [Ozark reference implementation](https://ozark.java.net/)
 
-## Getting Started
 
-This project is Gradle based and comes with a Gradle Wrapper, so you don't have to have Gradle installed on your machine.
-To build the WAR file, just type
+## Usage / Getting Started
+
+To be able to use this library as a dependency in your own project, check it out and build it with (the provided) Gradle(wrapper):
 
     $ gradlew build
 
-in your console/terminal. This will build a `ozark-react.war` in the `build` folder. You can deploy this WAR into an [Apache Tomcat](http://tomcat.apache.org) or [Jetty](http://eclipse.org/jetty/) servlet container.
-After starting your server, you should be able to access the application at this address:
+If you don't want to build it on your own, you can use a ready build binary from [Jitpack.io](https://jitpack.io).
+A detailed description can be found at
 
-    http://localhost:8080/ozark-react/
+- [https://jitpack.io/#dasniko/ozark-react/0.1.0](https://jitpack.io/#dasniko/ozark-react/0.1.0)  
+_(possibly you have to change the version tag to the correct version)_
 
+You don't have to use Gradle to use it in your project, just use whatever build tool you like (e.g. Maven, SBT, etc.)
+
+
+## Contribution / Issues
+
+Don't hesitate to contribute to this project in any kind of sending [PRs](https://github.com/dasniko/ozark-react/pulls) for improvements, enhancements, and/or bug-fixes.
+
+I appreciate every issue that will be [reported](https://github.com/dasniko/ozark-react/issues).
+
+
+## License
+
+- [MIT License](https://github.com/dasniko/ozark-react/blob/master/LICENSE)
