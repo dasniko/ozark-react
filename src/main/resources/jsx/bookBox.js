@@ -1,6 +1,6 @@
 var converter = new Showdown.converter();
 
-var BookForm = React.createClass({displayName: "BookForm",
+var BookForm = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
         var author = this.refs.author.getDOMNode().value.trim();
@@ -14,46 +14,46 @@ var BookForm = React.createClass({displayName: "BookForm",
     },
     render: function () {
         return (
-            React.createElement("form", {className: "bookForm well", onSubmit: this.handleSubmit},
-                React.createElement("h4", null, "Add a new book:"),
-                React.createElement("input", {type: "text", placeholder: "Author", ref: "author", className: "form-control"}),
-                React.createElement("input", {type: "text", placeholder: "Title", ref: "title", className: "form-control"}),
-                React.createElement("button", {type: "submit", className: "btn btn-primary"}, "Add book")
-            )
+            <form className="bookForm well" onSubmit={this.handleSubmit}>
+                <h4>Add a new book:</h4>
+                <input type="text" placeholder="Author" ref="author" className="form-control" />
+                <input type="text" placeholder="Title" ref="title" className="form-control"/>
+                <button type="submit" className="btn btn-primary">Add book</button>
+            </form>
         );
     }
 });
 
-var Book = React.createClass({displayName: "Book",
+var Book = React.createClass({
     render: function () {
         var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
-            React.createElement("div", {className: "book"},
-                React.createElement("h3", null, this.props.author),
-                React.createElement("div", {className: "lead", dangerouslySetInnerHTML: {__html: rawMarkup}})
-            )
+            <div className="book">
+                <h3>{this.props.author}</h3>
+                <div className="lead" dangerouslySetInnerHTML={{__html: rawMarkup}} />
+            </div>
         );
     }
 });
 
-var BookList = React.createClass({displayName: "BookList",
+var BookList = React.createClass({
     render: function () {
         var bookNodes = this.props.data.map(function (book, index) {
             return (
-                React.createElement(Book, {author: book.author, key: index},
-                    book.title
-                )
+                <Book author={book.author} key={index}>
+                    {book.title}
+                </Book>
             );
         });
         return (
-            React.createElement("div", {className: "bookList"},
-                bookNodes
-            )
+            <div className="bookList">
+                {bookNodes}
+            </div>
         );
     }
 });
 
-var BookBox = React.createClass({displayName: "BookBox",
+var BookBox = React.createClass({
     handleBookSubmit: function (book) {
         var books = this.state.data;
         books.push(book);
@@ -94,11 +94,11 @@ var BookBox = React.createClass({displayName: "BookBox",
     },
     render: function () {
         return (
-            React.createElement("div", {className: "bookBox"},
-                React.createElement("h1", null, "Best Books ever!"),
-                React.createElement(BookList, {data: this.state.data}),
-                React.createElement(BookForm, {onBookSubmit: this.handleBookSubmit})
-            )
+            <div className="bookBox">
+                <h1>Best Books ever!</h1>
+                <BookList data={this.state.data} />
+                <BookForm onBookSubmit={this.handleBookSubmit} />
+            </div>
         );
     }
 });
@@ -106,7 +106,7 @@ var BookBox = React.createClass({displayName: "BookBox",
 var renderClient = function (books) {
     var data = books || [];
     React.render(
-        React.createElement(BookBox, {data: data, url: "books.json", pollInterval: 5000}),
+        <BookBox data={data} url='books.json' pollInterval={5000} />,
         document.getElementById("content")
     );
 };
@@ -114,6 +114,6 @@ var renderClient = function (books) {
 var renderServer = function (books) {
     var data = Java.from(books);
     return React.renderToString(
-        React.createElement(BookBox, {data: data, url: "books.json", pollInterval: 5000})
+        <BookBox data={data} url='books.json' pollInterval={5000} />
     );
 };

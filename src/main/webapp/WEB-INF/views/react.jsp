@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Hello React from Ozark</title>
+    <title>ReactJS Bookstore with Ozark</title>
 
     <script src="${mvc.contextPath}/webjars/react/0.14.2/react.min.js"></script>
     <script src="${mvc.contextPath}/webjars/showdown/0.3.1/compressed/showdown.js"></script>
