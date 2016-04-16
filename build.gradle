@@ -1,3 +1,7 @@
+plugins {
+    id 'com.moowork.node' version '0.12'
+}
+
 apply plugin: 'war'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -29,3 +33,9 @@ dependencies {
     compile 'org.webjars:jquery:2.2.3'
     compile 'org.webjars:materializecss:0.97.5'
 }
+
+npm_run {
+    args = ['webpack']
+}
+
+processResources.dependsOn('npm_install', 'npm_run')
