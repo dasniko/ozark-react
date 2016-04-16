@@ -3,11 +3,9 @@ import Book from "./book";
 
 export default class BookList extends React.Component {
     render() {
-        var bookNodes = this.props.data.map(function (book, index) {
+        let bookNodes = this.props.data.map(function (book, index) {
             return (
-                <Book author={book.author} key={index}>
-                    {book.title}
-                </Book>
+                <Book author={book.author} title={book.title} key={index}/>
             );
         });
         return (

@@ -20,12 +20,14 @@ export default class BookForm extends React.Component {
 
     render() {
         return (
-            <form className="bookForm well" onSubmit={this.handleSubmit}>
-                <h4>Add a new book:</h4>
-                <input type="text" placeholder="Author" ref="author" className="form-control"/>
-                <input type="text" placeholder="Title" ref="title" className="form-control"/>
-                <button type="submit" className="btn btn-primary">Add book</button>
-            </form>
+            <div className="card">
+                <form className="bookForm card-content" onSubmit={this.handleSubmit}>
+                    <div className="card-title">Add a new book:</div>
+                    <input type="text" placeholder="Author" ref="author" className="form-control"/>
+                    <input type="text" placeholder="Title" ref="title" className="form-control"/>
+                    <button type="submit" className="btn btn-primary">Add book</button>
+                </form>
+            </div>
         );
     }
 }

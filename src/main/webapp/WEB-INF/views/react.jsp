@@ -8,8 +8,10 @@
 
     <title>ReactJS Bookstore with Ozark</title>
 
+    <link href="${mvc.contextPath}/webjars/materializecss/0.97.5/css/materialize.min.css" rel="stylesheet">
+
     <script src="${mvc.contextPath}/webjars/jquery/2.2.3/jquery.min.js"></script>
-    <link href="${mvc.contextPath}/webjars/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <script src="${mvc.contextPath}/webjars/materializecss/0.97.5/js/materialize.min.js"></script>
 </head>
 
 <body>
