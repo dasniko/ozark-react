@@ -8,19 +8,17 @@
 
     <title>ReactJS Bookstore with Ozark</title>
 
-    <script src="${mvc.contextPath}/webjars/react/0.14.8/react.min.js"></script>
     <script src="${mvc.contextPath}/webjars/jquery/2.2.3/jquery.min.js"></script>
-
     <link href="${mvc.contextPath}/webjars/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>
 
     <div id="content" class="container">${content}</div>
-    <script type="text/javascript" src="${mvc.contextPath}/js/bookBox.js"></script>
+    <script type="text/javascript" src="${mvc.contextPath}/js/app.js"></script>
     <script type="text/javascript">
         $(function () {
-            renderClient(${data});
+            BookApp.renderClient(${data});
         });
     </script>
 
