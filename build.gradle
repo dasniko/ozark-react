@@ -3,8 +3,6 @@ plugins {
 }
 apply plugin: 'war'
 
-group = 'com.github.dasniko'
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -20,6 +18,9 @@ repositories {
 dependencies {
     // servlet-api
     providedCompile 'javax:javaee-web-api:7.0'
+    // mvc api and ri
+    compile 'javax.mvc:javax.mvc-api:1.0-SNAPSHOT'
+    compile 'org.glassfish.ozark:ozark:1.0.0-m03-SNAPSHOT'
     // required dependencies to be able to deploy to a plain servlet container like tomcat
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.2'
     compile 'org.glassfish.jersey.ext.cdi:jersey-cdi1x:2.22.2'
@@ -27,8 +28,6 @@ dependencies {
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.2'
     compile 'javax.enterprise:cdi-api:2.0-EDR1'
     compile 'org.jboss.weld.servlet:weld-servlet-core:3.0.0.Alpha12'
-    // the actual ozark-react viewenginge
-    compile 'com.github.dasniko:ozark-react:0.2.0'
     // some needed webjars (frontend-stuff)
     compile 'org.webjars:jquery:2.2.3'
     compile 'org.webjars:bootstrap:3.3.6'

@@ -1,0 +1,67 @@
+package dasniko.ozark.react;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.glassfish.ozark.engine.ServletViewEngine;
+import org.glassfish.ozark.engine.ViewEngineContextImpl;
+
+import javax.annotation.Priority;
+import javax.inject.Inject;
+import javax.mvc.Models;
+import javax.mvc.engine.Priorities;
+import javax.mvc.engine.ViewEngineContext;
+import javax.mvc.engine.ViewEngineException;
+import javax.servlet.ServletException;
+import java.io.IOException;
+
+/**
+ * @author Niko Köbler, http://www.n-k.de, @dasniko
+ */
+@Priority(Priorities.FRAMEWORK)
+public class ReactViewEngine extends ServletViewEngine {
+
+    private static final String viewPrefix = "react:";
+
+    @Inject
+    React react;
+
+    ObjectMapper mapper = new ObjectMapper();
+
+    @Override
+    public boolean supports(String view) {
+        return view.startsWith(viewPrefix);
+    }
+
+    @Override
+    public void processView(ViewEngineContext context) throws ViewEngineException {
+        // parse view and extract the actual template
+        String template = context.getView().substring(viewPrefix.length());
+
+        // get "data" from model
+        Models models = context.getModels();
+        Object data = models.get("data");
+
+        // call js function on data to generate html
+        String content = react.render(data);
+
+        // and put results as string in model
+        models.put("content", content);
+        try {
+            models.put("data", mapper.writeValueAsString(data));
+        } catch (JsonProcessingException e) {
+            throw new ViewEngineException(e);
+        }
+
+        // create a new context with the actual view and forward to ServletViewEngine
+        ViewEngineContext ctx = new ViewEngineContextImpl(template, models,
+                context.getRequest(), context.getResponse(), context.getUriInfo(),
+                context.getResourceInfo(), context.getConfiguration());
+
+        try {
+            forwardRequest(ctx, "*.jsp", "*.jspx");
+        } catch (ServletException | IOException e) {
+            throw new ViewEngineException(e);
+        }
+    }
+
+}
