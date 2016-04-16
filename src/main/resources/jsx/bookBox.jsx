@@ -50,7 +50,7 @@ export default class BookBox extends React.Component {
 
     render() {
         return (
-            <div className="bookBox">
+            <div className="bookBox row">
                 <h2>Best Books ever!</h2>
                 <BookList data={this.state.data}/>
                 <BookForm onBookSubmit={this.handleBookSubmit}/>

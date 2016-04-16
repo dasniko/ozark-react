@@ -8,6 +8,7 @@
 
     <title>ReactJS Bookstore with Ozark</title>
 
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="${mvc.contextPath}/webjars/materializecss/0.97.5/css/materialize.min.css" rel="stylesheet">
 
     <script src="${mvc.contextPath}/webjars/jquery/2.2.3/jquery.min.js"></script>

@@ -9,7 +9,7 @@ export default class BookList extends React.Component {
             );
         });
         return (
-            <div className="bookList">
+            <div className="bookList col s6">
                 {bookNodes}
             </div>
         );
