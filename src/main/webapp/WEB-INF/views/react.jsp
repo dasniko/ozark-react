@@ -8,11 +8,10 @@
 
     <title>ReactJS Bookstore with Ozark</title>
 
-    <script src="${mvc.contextPath}/webjars/react/0.14.2/react.min.js"></script>
-    <script src="${mvc.contextPath}/webjars/showdown/0.3.1/compressed/showdown.js"></script>
-    <script src="${mvc.contextPath}/webjars/jquery/1.11.3/jquery.min.js"></script>
+    <script src="${mvc.contextPath}/webjars/react/0.14.8/react.min.js"></script>
+    <script src="${mvc.contextPath}/webjars/jquery/2.2.3/jquery.min.js"></script>
 
-    <link href="${mvc.contextPath}/webjars/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="${mvc.contextPath}/webjars/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 </head>
 
 <body>

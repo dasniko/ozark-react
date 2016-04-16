@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var BookForm = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
@@ -26,11 +24,10 @@ var BookForm = React.createClass({
 
 var Book = React.createClass({
     render: function () {
-        var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             <div className="book">
                 <h3>{this.props.author}</h3>
-                <div className="lead" dangerouslySetInnerHTML={{__html: rawMarkup}} />
+                <div className="lead" dangerouslySetInnerHTML={{__html: this.props.children.toString()}}></div>
             </div>
         );
     }

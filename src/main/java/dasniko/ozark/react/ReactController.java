@@ -24,6 +24,14 @@ public class ReactController {
     public String index() throws Exception {
         List<Book> books = service.getBooks();
         models.put("data", books);
-        return "react:react.jsp?function=renderServer";
+        return "react:react.jsp";
     }
+
+//    @GET
+//    public String index() throws Exception {
+//        List<Book> books = service.getBooks();
+//        ObjectMapper mapper = new ObjectMapper();
+//        models.put("data", mapper.writeValueAsString(books));
+//        return "react.jsp";
+//    }
 }
