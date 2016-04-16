@@ -38,4 +38,4 @@ npm_run {
     args = ['webpack']
 }
 
-processResources.dependsOn('npm_run')
+processResources.dependsOn('npm_install', 'npm_run')
