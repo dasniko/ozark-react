@@ -28,7 +28,7 @@ public class ReactViewEngine extends ServletViewEngine {
     @Inject
     React react;
 
-    ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public boolean supports(String view) {

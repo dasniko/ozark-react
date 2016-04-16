@@ -29,8 +29,7 @@ public class React {
         // initial basically needed files for dealing with react
         List<String> jsResources = new ArrayList<>();
         jsResources.add("nashorn-polyfill.js");
-        jsResources.add("META-INF/resources/webjars/react/0.14.2/react.min.js");
-        jsResources.add("META-INF/resources/webjars/showdown/0.3.1/compressed/showdown.js");
+        jsResources.add("META-INF/resources/webjars/react/0.14.8/react.min.js");
 
         // add all resources from custom application
         jsResources.addAll(getAllFilesFromResourcePath());
@@ -60,7 +59,7 @@ public class React {
         }
     }
 
-    public  String render(String function, Object object) {
+    String render(String function, Object object) {
         try {
             Object html = engineHolder.get().invokeFunction(function, object);
             return String.valueOf(html);
