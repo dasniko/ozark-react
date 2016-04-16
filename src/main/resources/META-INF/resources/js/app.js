@@ -1,0 +1,1 @@
+// we need this empty file as a reference to /resources/js/app.js, so we can use it from the browser

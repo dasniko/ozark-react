@@ -1,6 +1,7 @@
 package dasniko.ozark.react;
 
-import javax.script.Invocable;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
@@ -17,17 +18,16 @@ public class React {
         ScriptEngine nashorn = new ScriptEngineManager().getEngineByName("nashorn");
         try {
             nashorn.eval(read("/nashorn-polyfill.js"));
-            nashorn.eval(read("/META-INF/resources/webjars/react/0.14.8/react.min.js"));
-            nashorn.eval(read("/js/bookBox.js"));
+            nashorn.eval(read("/js/app.js"));
         } catch (ScriptException e) {
             throw new RuntimeException(e);
         }
         return nashorn;
     });
 
-    public String render(Object object) {
+    String render(Object object) {
         try {
-            Object html = ((Invocable) engineHolder.get()).invokeFunction("renderServer", object);
+            Object html = ((ScriptObjectMirror) engineHolder.get().get("BookApp")).callMember("renderServer", object);
             return String.valueOf(html);
         } catch (Exception e) {
             throw new IllegalStateException("failed to render react component", e);
