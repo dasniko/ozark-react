@@ -24,7 +24,7 @@ public class ReactController {
     public String index() throws Exception {
         List<Book> books = service.getBooks();
         models.put("data", books);
-        return "react:react.jsp";
+        return "react:react.jsp?function=BookApp.renderServer";
     }
 
 //    @GET
