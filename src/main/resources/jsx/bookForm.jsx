@@ -25,11 +25,11 @@ export default class BookForm extends React.Component {
                     <div className="card-title">Add a new book:</div>
                     <div className="input-field">
                         <input type="text" id="author" ref="author" className="validate"/>
-                        <label for="author">Author</label>
+                        <label htmlFor="author">Author</label>
                     </div>
                     <div className="input-field">
                         <input type="text" id="title" ref="title" className="validate"/>
-                        <label for="title">Title</label>
+                        <label htmlFor="title">Title</label>
                     </div>
                     <button type="submit" className="btn waves-effect waves-light">Add book
                         <i className="material-icons right">send</i>
