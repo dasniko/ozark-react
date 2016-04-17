@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.github.dasniko'
-version = '0.2.0'
+version = '0.3.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -17,5 +17,4 @@ dependencies {
     compile 'javax.mvc:javax.mvc-api:1.0-SNAPSHOT'
     compile 'org.glassfish.ozark:ozark:1.0.0-m03-SNAPSHOT'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
-    compile 'org.webjars:react:0.14.8'
 }

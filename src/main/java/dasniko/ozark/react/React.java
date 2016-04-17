@@ -2,6 +2,7 @@ package dasniko.ozark.react;
 
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import jdk.nashorn.api.scripting.ScriptObjectMirror;
 
 import javax.script.ScriptException;
 import java.io.File;
@@ -29,7 +30,6 @@ public class React {
         // initial basically needed files for dealing with react
         List<String> jsResources = new ArrayList<>();
         jsResources.add("nashorn-polyfill.js");
-        jsResources.add("META-INF/resources/webjars/react/0.14.8/react.min.js");
 
         // add all resources from custom application
         jsResources.addAll(getAllFilesFromResourcePath());
@@ -61,7 +61,13 @@ public class React {
 
     String render(String function, Object object) {
         try {
-            Object html = engineHolder.get().invokeFunction(function, object);
+            Object html;
+            if (function.contains(".")) {
+                String[] parts = function.split("\\.");
+                html = ((ScriptObjectMirror) engineHolder.get().get(parts[0])).callMember(parts[1], object);
+            } else {
+                html = engineHolder.get().invokeFunction(function, object);
+            }
             return String.valueOf(html);
         }
         catch (Exception e) {

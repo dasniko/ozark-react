@@ -32,7 +32,7 @@ To be able to use this library as a dependency in your own project, check it out
 If you don't want to build it on your own, you can use a ready build binary from [Jitpack.io](https://jitpack.io).
 A detailed description can be found at
 
-- [https://jitpack.io/#dasniko/ozark-react/0.1.0](https://jitpack.io/#dasniko/ozark-react/0.1.0)  
+- [https://jitpack.io/#dasniko/ozark-react/0.3.0](https://jitpack.io/#dasniko/ozark-react/0.3.0)  
 _(possibly you have to change the version tag to the correct version)_
 
 You don't have to use Gradle to use it in your project, just use whatever build tool you like (e.g. Maven, SBT, etc.)
