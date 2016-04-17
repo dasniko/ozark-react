@@ -12,15 +12,13 @@ repositories {
     mavenLocal()
     // for glassfish/mvc/ozark dependencies
     maven { url 'https://maven.java.net/content/groups/public/' }
-    // for ozark-react dependency
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
     // servlet-api
     providedCompile 'javax:javaee-web-api:7.0'
     // mvc api and ri
-    compile 'javax.mvc:javax.mvc-api:1.0-SNAPSHOT'
+    compile 'javax.mvc:javax.mvc-api:1.0-edr2'
     compile 'org.glassfish.ozark:ozark:1.0.0-m03-SNAPSHOT'
     // required dependencies to be able to deploy to a plain servlet container like tomcat
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.2'

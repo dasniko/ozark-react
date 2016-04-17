@@ -2,16 +2,19 @@ package dasniko.ozark.react;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.glassfish.ozark.engine.ServletViewEngine;
-import org.glassfish.ozark.engine.ViewEngineContextImpl;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.mvc.Models;
 import javax.mvc.engine.Priorities;
+import javax.mvc.engine.ViewEngine;
 import javax.mvc.engine.ViewEngineContext;
 import javax.mvc.engine.ViewEngineException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
@@ -21,12 +24,14 @@ import java.util.stream.Collectors;
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
 @Priority(Priorities.FRAMEWORK)
-public class ReactViewEngine extends ServletViewEngine {
+public class ReactViewEngine implements ViewEngine {
 
     private static final String viewPrefix = "react:";
 
     @Inject
     React react;
+    @Inject
+    ServletContext servletContext;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -67,13 +72,8 @@ public class ReactViewEngine extends ServletViewEngine {
             throw new ViewEngineException(e);
         }
 
-        // create a new context with the actual view and forward to ServletViewEngine
-        ViewEngineContext ctx = new ViewEngineContextImpl(template, models,
-                context.getRequest(), context.getResponse(), context.getUriInfo(),
-                context.getResourceInfo(), context.getConfiguration());
-
         try {
-            forwardRequest(ctx, "*.jsp", "*.jspx");
+            processRequest(context, models, template);
         } catch (ServletException | IOException e) {
             throw new ViewEngineException(e);
         }
@@ -81,5 +81,47 @@ public class ReactViewEngine extends ServletViewEngine {
 
     private Map<String, String> parseQueryString(final String query) {
         return Arrays.asList(query.split("&")).stream().map(p -> p.split("=")).collect(Collectors.toMap(s -> s[0], s -> s[1]));
+    }
+
+    private void processRequest(final ViewEngineContext context, final Models models, final String view) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = servletContext.getNamedDispatcher("jsp");
+        // Need new request with updated URI and extension matching semantics
+        final HttpServletRequest request = new HttpServletRequestWrapper(context.getRequest()) {
+            @Override
+            public String getRequestURI() {
+                return resolveView(context, view);
+            }
+
+            @Override
+            public String getServletPath() {
+                return resolveView(context, view);
+            }
+
+            @Override
+            public String getPathInfo() {
+                return null;
+            }
+
+            @Override
+            public StringBuffer getRequestURL() {
+                return new StringBuffer(getRequestURI());
+            }
+        };
+
+        for (String name : models) {
+            request.setAttribute(name, models.get(name));
+        }
+
+        requestDispatcher.forward(request, context.getResponse());
+    }
+
+    private String resolveView(final ViewEngineContext context, final String view) {
+        if (!view.startsWith("/")) {
+            String viewFolder = (String) context.getConfiguration().getProperty(VIEW_FOLDER);
+            viewFolder = viewFolder == null ? DEFAULT_VIEW_FOLDER : viewFolder;
+            viewFolder += !viewFolder.endsWith("/") ? "/" : "";
+            return viewFolder + view;
+        }
+        return view;
     }
 }
