@@ -13,10 +13,12 @@ import javax.mvc.engine.ViewEngineException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -84,35 +86,51 @@ public class ReactViewEngine implements ViewEngine {
     }
 
     private void processRequest(final ViewEngineContext context, final Models models, final String view) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = servletContext.getNamedDispatcher("jsp");
-        // Need new request with updated URI and extension matching semantics
-        final HttpServletRequest request = new HttpServletRequestWrapper(context.getRequest()) {
-            @Override
-            public String getRequestURI() {
-                return resolveView(context, view);
-            }
-
-            @Override
-            public String getServletPath() {
-                return resolveView(context, view);
-            }
-
-            @Override
-            public String getPathInfo() {
-                return null;
-            }
-
-            @Override
-            public StringBuffer getRequestURL() {
-                return new StringBuffer(getRequestURI());
-            }
-        };
+        RequestDispatcher requestDispatcher = null;
+        HttpServletRequest request = context.getRequest();
 
         for (String name : models) {
             request.setAttribute(name, models.get(name));
         }
 
+        final String viewExtension = getViewExtension(view);
+        for (Map.Entry<String, ? extends ServletRegistration> e : servletContext.getServletRegistrations().entrySet()) {
+            final Collection<String> mappings = e.getValue().getMappings();
+            if (mappings.contains(viewExtension)) {
+                requestDispatcher = servletContext.getNamedDispatcher(e.getKey());
+                request = new HttpServletRequestWrapper(context.getRequest()) {
+                    @Override
+                    public String getRequestURI() {
+                        return resolveView(context, view);
+                    }
+
+                    @Override
+                    public String getServletPath() {
+                        return getRequestURI();
+                    }
+
+                    @Override
+                    public String getPathInfo() {
+                        return null;
+                    }
+
+                    @Override
+                    public StringBuffer getRequestURL() {
+                        return new StringBuffer(getRequestURI());
+                    }
+                };
+            }
+        }
+
+        if (requestDispatcher == null) {
+            requestDispatcher = servletContext.getRequestDispatcher(resolveView(context, view));
+        }
+
         requestDispatcher.forward(request, context.getResponse());
+    }
+
+    private String getViewExtension(final String view) {
+        return "*" + view.substring(view.lastIndexOf("."));
     }
 
     private String resolveView(final ViewEngineContext context, final String view) {
