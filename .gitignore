@@ -11,5 +11,6 @@ build
 .classpath
 .project
 .settings
+node
 node_modules
 src/main/resources/js
