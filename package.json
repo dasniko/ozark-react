@@ -4,13 +4,13 @@
   "description": "A ViewEngine for ReactJS templates for the Java EE MVC 1.0 reference implementation Ozark.",
   "main": "index.js",
   "dependencies": {
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   },
   "devDependencies": {
     "babel-core": "^5.8.38",
-    "babel-loader": "^5.4.0",
-    "webpack": "^1.13.0"
+    "babel-loader": "^5.4.2",
+    "webpack": "^1.13.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dasniko/ozark-react-example.git"
+    "url": "git+https://github.com/dasniko/ozark-react.git"
   },
   "keywords": [
     "react",
@@ -29,7 +29,7 @@
   "author": "Niko Köbler <niko@n-k.de> (http://www.n-k.de)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dasniko/ozark-react-example/issues"
+    "url": "https://github.com/dasniko/ozark-react/issues"
   },
-  "homepage": "https://github.com/dasniko/ozark-react-example#readme"
+  "homepage": "https://github.com/dasniko/ozark-react#readme"
 }
