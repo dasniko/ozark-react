@@ -27,6 +27,7 @@ dependencies {
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.22.2'
     compile 'javax.enterprise:cdi-api:2.0-EDR1'
     compile 'org.jboss.weld.servlet:weld-servlet-core:3.0.0.Alpha12'
+    compile 'org.apache.commons:commons-pool2:2.4.2'
     // some needed webjars (frontend-stuff)
     compile 'org.webjars:jquery:2.2.3'
     compile 'org.webjars:materializecss:0.97.5'
