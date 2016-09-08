@@ -17,18 +17,14 @@ import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * @author Niko Köbler, http://www.n-k.de, @dasniko
  */
 @Priority(Priorities.FRAMEWORK)
 public class ReactViewEngine implements ViewEngine {
-
-    private static final String viewPrefix = "react:";
 
     @Inject
     React react;
@@ -39,37 +35,27 @@ public class ReactViewEngine implements ViewEngine {
 
     @Override
     public boolean supports(String view) {
-        return view.startsWith(viewPrefix);
+        return view.startsWith("react:");
     }
 
     @Override
     public void processView(ViewEngineContext context) throws ViewEngineException {
         // parse view and extract the actual template and the react.js function to call
-        String view = context.getView();
-        String[] viewParts = view.substring(viewPrefix.length()).split("\\?");
-        if (viewParts.length < 2) {
-            throw new ViewEngineException("You have to specify at least a view and a function (e.g. react:view.jsp?function=renderOnServer)!");
-        }
-
-        String template = viewParts[0];
-
-        Map<String, String> params = parseQueryString(viewParts[1]);
-        String function = params.get("function");
-
-        String dataKey = params.getOrDefault("data", "data");
-        String contentKey = params.getOrDefault("content", "content");
+        String view = context.getView(); // react:react.jsp?function=BookApp.renderServer
+        String template = view.substring("react:".length(), view.indexOf("?"));
+        String function = view.substring(view.indexOf("function=") + 9);
 
         // get "data" from model
         Models models = context.getModels();
-        Object data = models.get(dataKey);
+        Object data = models.get("data");
 
         // call given js function on data
         String content = react.render(function, data);
 
         // and put results as string in model
-        models.put(contentKey, content);
+        models.put("content", content);
         try {
-            models.put(dataKey, mapper.writeValueAsString(data));
+            models.put("data", mapper.writeValueAsString(data));
         } catch (JsonProcessingException e) {
             throw new ViewEngineException(e);
         }
@@ -79,10 +65,6 @@ public class ReactViewEngine implements ViewEngine {
         } catch (ServletException | IOException e) {
             throw new ViewEngineException(e);
         }
-    }
-
-    private Map<String, String> parseQueryString(final String query) {
-        return Arrays.asList(query.split("&")).stream().map(p -> p.split("=")).collect(Collectors.toMap(s -> s[0], s -> s[1]));
     }
 
     private void processRequest(final ViewEngineContext context, final Models models, final String view) throws ServletException, IOException {
