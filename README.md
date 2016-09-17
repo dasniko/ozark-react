@@ -1,8 +1,8 @@
 # Isomorphic (Universal) Ozark ReactJS ViewEngine Demo
 
 [![Release](https://img.shields.io/github/release/dasniko/ozark-react.svg)](https://jitpack.io/#dasniko/ozark-react)
-[![Build Status](https://img.shields.io/travis/dasniko/ozark-react-example.svg)](https://travis-ci.org/dasniko/ozark-react-example)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dasniko/ozark-react-example/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/dasniko/ozark-react.svg)](https://travis-ci.org/dasniko/ozark-react)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dasniko/ozark-react/blob/master/LICENSE)
 
 This is a simple demo application demonstrating how to use isomorphic/universal JavaScript with server-side pre-rendered [ReactJS](http://www.reactjs.org) templates with the new Java EE MVC 1.0 ([JSR-371](https://jcp.org/en/jsr/detail?id=371)) reference implementation [Ozark](https://ozark.java.net).
 
@@ -33,12 +33,12 @@ in your console/terminal. This will build a `ozark-react.war` in the `build/libs
 The project comes with all mechanisms to install and bundle all dependencies.
 Not only the Java deps, but also the NPM JavaScript dependencies like React.JS (the actual runtime lib), Webpack and Babel (for transpiling and bundling)
 
+_For your convenience, also a Maven `pom.xml` file is available._
+
 You can deploy this WAR into an [Apache Tomcat](http://tomcat.apache.org) or [Jetty](http://eclipse.org/jetty/) servlet container.
 After starting your server, you should be able to access the application at this address:
 
 [http://localhost:8080/ozark/react](http://localhost:8080/ozark/react)
-
-_BTW: You don't have to use Gradle to use it in your project, just use whatever build tool you like (e.g. Maven, SBT, etc.)_
 
 ## Building the JavaScript artifacts
 
@@ -51,6 +51,13 @@ This file is then used within the application at runtime (server- and client-sid
 
 Also, if this means that you have two different build tools (like Gradle and NPM here) for one project, the configuration and result of the tools is much better than trying something else.
 Luckily, it's easily possible, to start the NPM tasks from within the Gradle build process, so it won't become pain in the ass to run both when needed.
+
+## Class Diagram / Data Flow
+
+This diagram gives you a rough overview of how the related classes depend on each other, resp. are communicating with each other
+_(it's no correct UML syntax!)_.
+
+![](ozark-react-flow.gif)
 
 ## Contribution / Issues
 

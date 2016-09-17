@@ -1,5 +1,5 @@
 {
-  "name": "ozark-react-example",
+  "name": "ozark-react",
   "version": "1.0.0",
   "description": "A ViewEngine for ReactJS templates for the Java EE MVC 1.0 reference implementation Ozark.",
   "main": "index.js",
