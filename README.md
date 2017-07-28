@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/travis/dasniko/ozark-react.svg)](https://travis-ci.org/dasniko/ozark-react)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/dasniko/ozark-react/blob/master/LICENSE)
 
-This is a simple demo application demonstrating how to use isomorphic/universal JavaScript with server-side pre-rendered [ReactJS](http://www.reactjs.org) templates with the new Java EE MVC 1.0 ([JSR-371](https://jcp.org/en/jsr/detail?id=371)) reference implementation [Ozark](https://ozark.java.net).
+This is a simple demo application demonstrating how to use isomorphic/universal JavaScript with server-side pre-rendered [ReactJS](http://www.reactjs.org) templates with the new Java EE MVC 1.0 ([JSR-371](https://jcp.org/en/jsr/detail?id=371)) reference implementation [Ozark](https://github.com/mvc-spec/ozark).
 
 To establish the use of React.JS on the Java server-side, I created a `ViewEngine` implementation for Ozark/MVC 1.0, which uses the server-side rendering option of React.JS.
 
@@ -14,7 +14,7 @@ MVC 1.0 is at a very early stage and this project uses snapshot versions of Ozar
 So there might be some not yet known effects/troubles when running the application.
 
 - [MVC 1.0](https://java.net/projects/mvc-spec/pages/Home) specification / [JSR-371](https://www.jcp.org/en/jsr/detail?id=371)
-- [Ozark reference implementation](https://ozark.java.net/)
+- [Ozark reference implementation](https://github.com/mvc-spec/ozark)
 
 For your convenience, this project comes with all dependencies which are needed to run the application in a pure servlet-container like [Apache Tomcat](http://tomcat.apache.org) or [Jetty](http://eclipse.org/jetty/).
 So you don't have to rely on your container to provide all of the technology and libraries
